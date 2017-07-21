@@ -13,7 +13,7 @@ var Student = require('./models/students');
 
 
 var app = express();
-
+mongoose.connect('mongodb://localhost:27017/portal');
 app.set('port', process.env.PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,14 +31,15 @@ app.use('/', index);
 app.use('/users', users);
 
 app.get("/students", function(req,res){
-
-  Students.find({},function(err,students){
-    res.render("students",{students : students});
-  });
+  //res.render("students");
+   Student.find({},function(err,students){
+    
+     res.render("students",{students : students});
+   });
 });
 
 app.post("/students", function(req,res){
-
+  console.log(req.body)
   
 });
 

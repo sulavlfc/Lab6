@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script type="application/javascript" src="/javascripts/students.js"></script>
 <style type="text/css">
-    .bs-example{
+    .container{
     	margin: 20px;
     }
 	/* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
@@ -19,39 +20,57 @@
 </style>
 </head>
 <body>
-<div class="bs-example">
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="firstName" class="control-label col-xs-2">First Name</label>
-            <div class="col-xs-10">
-                <input type="firstName" name="firstName" class="form-control" id="firstName" placeholder="First Name">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName" class="control-label col-xs-2">Last Name</label>
-            <div class="col-xs-10">
-                <input type="lastName" name=""class="form-control" id="firstName" placeholder="Last Name">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="email" class="control-label col-xs-2">Email</label>
-            <div class="col-xs-10">
-                <input type="email" class="form-control" id="email" placeholder="Email">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-10">
-                <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
+<div class="container" >
+    
+    
+    <div class="dropdown" style="margin : 20px;" >
+       
+        <button class="btn btn-default dropdown-toggle" type="button" id="role" data-toggle="dropdown">Roles
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li class="li"><a  href="#">Admin</a></li>
+            <li class="li"><a  href="#">Student</a></li>
+        </ul>
+    </div>
+    <div class= "admin" style="display:none;">
+        <form class="form-horizontal" method="POST" action="/students">
+            <div class="form-group ">
+                <label for="firstName" class="control-label col-xs-2">First Name</label>
+                <div class="col-xs-4">
+                    <input type="text" name="firstName" class="form-control " id="firstName" placeholder="First Name">
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-10">
-                <button type="submit" class="btn btn-primary">Login</button>
+            <div class="form-group">
+                <label for="lastName" class="control-label col-xs-2">Last Name</label>
+                <div class="col-xs-4">
+                    <input type="text" name="lastName"class="form-control" id="firstName" placeholder="Last Name">
+                </div>
             </div>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="email" class="control-label col-xs-2">Email</label>
+                <div class="col-xs-4">
+                    <input type="email" name="email"class="form-control" id="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="grades" class="control-label col-xs-2">Grade</label>
+                <div class="col-xs-2">
+                    <input type="text" name = "grade" class="form-control" id="grades" placeholder="Grades">
+                </div>
+            </div>   
+          <button type="submit" style="position : relative; left: 120px;;" class="btn btn-primary">Submit</button>
+                
+           
+        </form>
+    </div>
+
+    <div class= "student" style="display:none;">
+       <ul>
+        <% for(var i=0; i<students.length; i++) {%>
+        <li><%= students[i].name %></li>
+        <% } %>
+        </ul>
+    </div>
 </div>
 </body>
 </html>                                 		
