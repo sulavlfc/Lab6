@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="application/javascript" src="/javascripts/students.js"></script>
 <style type="text/css">
     .container{
@@ -18,10 +19,11 @@
         padding-top: 7px;
     }
 </style>
+
 </head>
 <body>
 <div class="container" >
-    
+    <a href="/students"> Home </a>
     
     <div class="dropdown" style="margin : 20px;" >
        
@@ -33,7 +35,7 @@
         </ul>
     </div>
     <div class= "admin" style="display:none;">
-        <form class="form-horizontal" method="POST" action="/students">
+        <form id="details" class="form-horizontal" method="POST" action="/students" onsubmit="onSubmit(e)">
             <div class="form-group ">
                 <label for="firstName" class="control-label col-xs-2">First Name</label>
                 <div class="col-xs-4">
@@ -57,20 +59,64 @@
                 <div class="col-xs-2">
                     <input type="text" name = "grade" class="form-control" id="grades" placeholder="Grades">
                 </div>
-            </div>   
-          <button type="submit" style="position : relative; left: 120px;;" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="control-label col-xs-2">Grade</label>
+                <div class="col-xs-2">
+                    <input type="text" name = "phone" class="form-control" id="phone" placeholder="Phone">
+                </div>
+            </div>               
+          <button type="submit" style="position : relative; left: 120px;" class="btn btn-primary">Submit</button>
                 
            
         </form>
     </div>
 
     <div class= "student" style="display:none;">
-       <ul>
-        <% for(var i=0; i<students.length; i++) {%>
-        <li><%= students[i].name %></li>
-        <% } %>
-        </ul>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var i=0; i<students.length; i++) {%>
+            <tr>
+                <td><%= students[i].firstname %></td>
+                <td><%= students[i].lastname %></td>
+                <td><%= students[i].email %></td>
+                 <td><p data-placement="top" data-toggle="tooltip"  title="Edit"><button class="myedit btn btn-primary btn-xs" data-mid ='<%= students[i]._id %>'><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+            </tr>
+            <!--<li><%= students[i].firstname %></li>-->
+            <% } %>
+            
+            </tbody>
+        </table>
+       
+        
     </div>
+
+    <div data-role="popup" id="myPopup" class="ui-content" style=" margin : 20px; background-color:darkgray">
+        <form id="details"  class="form-horizontal" style="width: 500px; margin:5px;">
+            <div class="form-group ">
+                <label for="phone" class="control-label col-xs-2">Phone</label>
+                <div class="col-md-4">
+                    <input type="text" name="phone" class="form-control " id="phone" placeholder="Phone">
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="course" class="control-label col-xs-2">Course</label>
+                <div class="col-md-4">
+                    <input type="text" name="course" class="form-control " id="course" placeholder="Course">
+            </div>
+            </div>
+            <button id="submit" type="submit" style="position: relative;left: 80px;" class="btn btn-primary">Save</button>
+        </form>
+            </div>
+        
+    
 </div>
 </body>
 </html>                                 		

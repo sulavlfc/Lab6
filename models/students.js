@@ -7,7 +7,7 @@ var studentSchema = new mongoose.Schema({
     phone: Number,
     grade : Number,
     address : String,
-    courses : [String]
+    courses : String
     
 });
 

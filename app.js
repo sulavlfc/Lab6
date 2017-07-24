@@ -33,32 +33,38 @@ app.use('/users', users);
 app.get("/students", function(req,res){
   //res.render("students");
    Student.find({},function(err,students){
-    
+    console.log(students)
      res.render("students",{students : students});
    });
 });
 
+app.post("/update/:id", function(req,res){
+  //res.render("students");
+   console.log(req.params.id)
+});
+
+
 app.post("/students", function(req,res){
-  console.log(req.body)
+  // console.log(req.body)
+  var student = new Student({
+        firstname : req.body.firstName,
+        lastname : req.body.lastName,
+        email : req.body.email,
+        grade : req.body.grade
+  });
+  student.save(function(err,data){
+    if(err)
+      console.log(err)
+    else
+     {
+          Student.find({},function(err,students){
+            res.render("students",{students : students});
+              res.end();
+              
+            });
+     }
+  })
   
-});
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
 });
 
 var server = app.listen(app.get('port'), function() {
