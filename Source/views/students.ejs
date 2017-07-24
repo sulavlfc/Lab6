@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Portal</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="application/javascript" src="/javascripts/students.js"></script>
+<style type="text/css">
+    .container{
+    	margin: 20px;
+    }
+	/* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
+    .form-horizontal .control-label{
+        padding-top: 7px;
+    }
+</style>
+
+</head>
+<body>
+<div class="container" >
+    <a href="/students"> Home </a>
+    
+    <div class="dropdown" style="margin : 20px;" >
+       
+        <button class="btn btn-default dropdown-toggle" type="button" id="role" data-toggle="dropdown">Roles
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li class="li"><a  href="#">Admin</a></li>
+            <li class="li"><a  href="#">Student</a></li>
+        </ul>
+    </div>
+    <div class= "admin" style="display:none;">
+        <form id="details" class="form-horizontal" method="POST" action="/students" onsubmit="onSubmit(e)">
+            <div class="form-group ">
+                <label for="firstName" class="control-label col-xs-2">First Name</label>
+                <div class="col-xs-4">
+                    <input type="text" name="firstName" class="form-control " id="firstName" placeholder="First Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="control-label col-xs-2">Last Name</label>
+                <div class="col-xs-4">
+                    <input type="text" name="lastName"class="form-control" id="firstName" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label col-xs-2">Email</label>
+                <div class="col-xs-4">
+                    <input type="email" name="email"class="form-control" id="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="grades" class="control-label col-xs-2">Grade</label>
+                <div class="col-xs-2">
+                    <input type="text" name = "grade" class="form-control" id="grades" placeholder="Grades">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="control-label col-xs-2">Phone</label>
+                <div class="col-xs-2">
+                    <input type="text" name = "phone" class="form-control" id="phone" placeholder="Phone">
+                </div>
+            </div>  
+             <div class="form-group">
+                <label for="course" class="control-label col-xs-2">Course</label>
+                <div class="col-xs-2">
+                    <input type="text" name = "course" class="form-control" id="course" placeholder="Course">
+                </div>
+            </div>
+                                  
+          <button type="submit" style="position : relative; left: 120px;" class="btn btn-primary">Submit</button>
+                
+           
+        </form>
+    </div>
+
+    <div class= "student" style="display:none;">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Course</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var i=0; i<students.length; i++) {%>
+            <tr>
+                <td><%= students[i].firstname %></td>
+                <td><%= students[i].lastname %></td>
+                <td><%= students[i].email %></td>
+                <td><%= students[i].phone %></td>
+                <td><%= students[i].course %></td>
+            </tr>
+            <!--<li><%= students[i].firstname %></li>-->
+            <% } %>
+            
+            </tbody>
+        </table>
+       
+        
+    </div>
+    
+</div>
+</body>
+</html>                                 		
